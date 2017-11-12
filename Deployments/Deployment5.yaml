@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: loggen-deployment5
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: loggen
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: <host where to run>
+      containers:
+      - name: loggen
+        image: quay.io/ashish_amarnath/log-gen:1.0.0-f
+        command:
+        - /loggen
+        - --bpl=512
+        - --logid=myawesomelogs5
+        - --timing=1
+        - --runtime=900
+        - --logtostderr
+        - --v=1
